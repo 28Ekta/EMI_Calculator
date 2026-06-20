@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free EMI Calculator by Ekta Gupta</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="app-shell">
+    <section class="calculator-panel" aria-labelledby="page-title">
+      <div class="intro">
+        <p class="eyebrow">Loan Planning Tool</p>
+        <h1 id="page-title">EMI Calculator</h1>
+        <p class="intro-copy">
+          Estimate your monthly installment, total interest, and full repayment value with clear, formatted results.
+        </p>
+        <p class="personal-note">
+          I built this because comparing loan options should be quick, clear, and free before making a financial decision.
+        </p>
+      </div>
+
+      <form class="calculator-form" id="emiForm">
+        <div class="field-group">
+          <div class="field-label-row">
+            <label for="loanAmount">Loan Amount</label>
+            <output id="loanAmountValue">Rs. 10,00,000</output>
+          </div>
+          <div class="input-wrap">
+            <span>Rs.</span>
+            <input type="number" id="loanAmount" min="10000" max="10000000" step="10000" value="1000000" required>
+          </div>
+          <input type="range" id="loanAmountRange" min="10000" max="10000000" step="10000" value="1000000" aria-label="Loan amount slider">
+        </div>
+
+        <div class="field-grid">
+          <div class="field-group">
+            <div class="field-label-row">
+              <label for="interestRate">Interest Rate</label>
+              <output id="interestRateValue">8.50%</output>
+            </div>
+            <div class="input-wrap">
+              <input type="number" id="interestRate" min="1" max="30" step="0.05" value="8.5" required>
+              <span>%</span>
+            </div>
+            <input type="range" id="interestRateRange" min="1" max="30" step="0.05" value="8.5" aria-label="Interest rate slider">
+          </div>
+
+          <div class="field-group">
+            <div class="field-label-row">
+              <label for="loanTenure">Loan Tenure</label>
+              <output id="loanTenureValue">20 Years</output>
+            </div>
+            <div class="input-wrap">
+              <input type="number" id="loanTenure" min="1" max="30" step="1" value="20" required>
+              <span>Years</span>
+            </div>
+            <input type="range" id="loanTenureRange" min="1" max="30" step="1" value="20" aria-label="Loan tenure slider">
+          </div>
+        </div>
+
+        <div class="actions">
+          <button type="submit" class="primary-btn">Calculate EMI</button>
+          <button type="button" class="secondary-btn" id="resetButton">Reset</button>
+        </div>
+
+        <p class="form-message" id="formMessage" role="status" aria-live="polite">
+          Adjust the values and click Calculate EMI to refresh your result.
+        </p>
+      </form>
+    </section>
+
+    <section class="results-panel" aria-label="EMI calculation results">
+      <div class="toast-message" id="toastMessage" role="status" aria-live="polite"></div>
+
+      <div class="emi-card">
+        <span class="metric-label">Monthly EMI</span>
+        <strong id="monthlyEmi">Rs. 0</strong>
+        <small id="emiNote">Based on your current loan details</small>
+        <div class="result-actions">
+          <button type="button" class="copy-btn" id="copySummaryButton">Copy Summary</button>
+          <button type="button" class="download-btn" id="downloadSummaryButton">Download Summary</button>
+        </div>
+      </div>
+
+      <div class="summary-grid">
+        <article>
+          <span>Principal Amount</span>
+          <strong id="principalAmount">Rs. 0</strong>
+        </article>
+        <article>
+          <span>Total Interest</span>
+          <strong id="totalInterest">Rs. 0</strong>
+        </article>
+        <article>
+          <span>Total Payment</span>
+          <strong id="totalPayment">Rs. 0</strong>
+        </article>
+        <article>
+          <span>Tenure</span>
+          <strong id="tenureSummary">0 Months</strong>
+        </article>
+      </div>
+
+      <div class="chart-section">
+        <div class="chart-header">
+          <h2>Payment Split</h2>
+          <span id="interestShare">0% Interest</span>
+        </div>
+        <div class="bar-chart" aria-hidden="true">
+          <span id="principalBar" class="principal-bar"></span>
+          <span id="interestBar" class="interest-bar"></span>
+        </div>
+        <div class="legend">
+          <span><i class="principal-dot"></i>Principal</span>
+          <span><i class="interest-dot"></i>Interest</span>
+        </div>
+      </div>
+
+      <div class="insight-box">
+        <h2>Loan Insight</h2>
+        <p id="loanInsight">Enter your loan details to see a repayment insight.</p>
+      </div>
+    </section>
+
+    <section class="repayment-panel" aria-label="Yearly repayment details">
+      <div class="table-section">
+        <div class="table-header">
+          <div>
+            <p class="eyebrow">Detailed Breakdown</p>
+            <h2>Yearly Repayment Plan</h2>
+          </div>
+          <span>Estimated principal, interest, and balance</span>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Year</th>
+                <th>Principal Paid</th>
+                <th>Interest Paid</th>
+                <th>Balance</th>
+              </tr>
+            </thead>
+            <tbody id="repaymentTable"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <footer class="site-footer">
+      <div>
+        <strong>Ekta Gupta</strong>
+        <a href="mailto:gupta10ekta@gmail.com">gupta10ekta@gmail.com</a>
+      </div>
+      <a class="digital-heroes-btn" href="https://digitalheroesco.com" target="_blank" rel="noopener">
+        Built for Digital Heroes
+      </a>
+    </footer>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
